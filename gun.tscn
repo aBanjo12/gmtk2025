@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://6hp1y3lw2e1i"]
+
+[ext_resource type="Script" uid="uid://bj7a8orctq4x2" path="res://GunScript.cs" id="1_vk1bi"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r8ywq"]
+
+[node name="Gun" type="Node" node_paths=PackedStringArray("Sprite")]
+script = ExtResource("1_vk1bi")
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(16, 24)
+texture = SubResource("PlaceholderTexture2D_r8ywq")
+offset = Vector2(0, -1)

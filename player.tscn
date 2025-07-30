@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1e8yna1iwog6"]
+[gd_scene load_steps=5 format=3 uid="uid://d1e8yna1iwog6"]
 
 [ext_resource type="Script" uid="uid://dq4fvvs7qpp00" path="res://PlayerControl.cs" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://6hp1y3lw2e1i" path="res://gun.tscn" id="2_onrkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mlf6e"]
 size = Vector2(1, 1)
@@ -24,3 +25,6 @@ shape = SubResource("RectangleShape2D_mlf6e")
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(32, 32)
 texture = SubResource("PlaceholderTexture2D_05hpe")
+
+[node name="Gun" parent="CharacterBody2D" node_paths=PackedStringArray("FollowTarget") instance=ExtResource("2_onrkg")]
+FollowTarget = NodePath("..")
