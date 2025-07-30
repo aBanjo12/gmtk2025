@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bydk0pdh7thsi"]
+
+[ext_resource type="Script" uid="uid://bc5521io1osm1" path="res://BulletMover.cs" id="1_v7oki"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rtl8c"]
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource("1_v7oki")
+Speed = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = SubResource("PlaceholderTexture2D_rtl8c")

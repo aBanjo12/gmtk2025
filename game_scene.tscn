@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://chw5gs6st4uox"]
+[gd_scene load_steps=3 format=3 uid="uid://chw5gs6st4uox"]
 
 [ext_resource type="PackedScene" uid="uid://d1e8yna1iwog6" path="res://player.tscn" id="1_mlf6e"]
+[ext_resource type="PackedScene" uid="uid://bydk0pdh7thsi" path="res://bullet.tscn" id="2_po0ka"]
 
 [node name="GameScene" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_mlf6e")]
+
+[node name="Bullet" parent="." instance=ExtResource("2_po0ka")]
+position = Vector2(507, 303)

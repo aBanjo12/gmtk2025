@@ -8,7 +8,10 @@ size = Vector2(1, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_05hpe"]
 
-[node name="Player" type="Node"]
+[node name="Player" type="Node2D"]
+
+[node name="Gun" parent="." node_paths=PackedStringArray("FollowTarget") instance=ExtResource("2_onrkg")]
+FollowTarget = NodePath("../CharacterBody2D")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_4flbx")
@@ -25,6 +28,3 @@ shape = SubResource("RectangleShape2D_mlf6e")
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(32, 32)
 texture = SubResource("PlaceholderTexture2D_05hpe")
-
-[node name="Gun" parent="CharacterBody2D" node_paths=PackedStringArray("FollowTarget") instance=ExtResource("2_onrkg")]
-FollowTarget = NodePath("..")
