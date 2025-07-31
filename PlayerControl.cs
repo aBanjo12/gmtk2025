@@ -11,6 +11,12 @@ public partial class PlayerControl : CharacterBody2D
 	[Export] public Key LeftKey;
 	[Export] public Key RightKey;
 
+	public override void _Ready()
+	{
+		LevelLoader levelLoader = GetTree().Root.GetNode<LevelLoader>("GameScene/LevelLoader");
+		levelLoader.LevelChange += OnLevelChange;
+	}
+
 	public override void _PhysicsProcess(double delta)
 	{
 		PlayerMovement(delta);
@@ -27,14 +33,22 @@ public partial class PlayerControl : CharacterBody2D
 			movement += new Vector2(1, 0);
 		if (Input.IsKeyPressed(LeftKey))
 			movement += new Vector2(-1, 0);
-		
+
 		movement = movement.Normalized();
-		
+
 		Velocity = movement * Speed;
 		MoveAndSlide();
 
 	}
-	
-	
+
+	public void OnLevelChange()
+	{
+		ResetPlayerPos();
+	}
+
+	public void ResetPlayerPos()
+	{
+		Position = new Vector2(0, 96);
+	}
 
 }

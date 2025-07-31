@@ -4,6 +4,7 @@ using System.Linq;
 
 public partial class LevelLoader : Node2D
 {
+    [Signal] public delegate void LevelChangeEventHandler();
     [Export] NodePath[] levelArrayNodePath;
 
     Node2D[] levelArr;
@@ -26,7 +27,7 @@ public partial class LevelLoader : Node2D
     }
     public void OnBodyEntered(Node2D body)
     {
-        GD.Print("A");
+        GD.Print("Level Change");
         GoToNextLevel(levelArr[1]);
     }
 
@@ -34,10 +35,13 @@ public partial class LevelLoader : Node2D
     {
         activeLevel.ProcessMode = ProcessModeEnum.Disabled;
         activeLevel.Visible = false;
+        activeLevel.GetNode<Area2D>("Exit").BodyEntered -= OnBodyEntered;
+
         activeLevel = nextLevel;
         activeLevel.ProcessMode = ProcessModeEnum.Always;
         activeLevel.Visible = true;
         ReadyLevelExit(activeLevel);
+        EmitSignal(SignalName.LevelChange);
     }
 
     public void ReadyLevelExit(Node2D level)

@@ -11,3 +11,5 @@ levelArrayNodePath = Array[NodePath]([NodePath("Level"), NodePath("Level2")])
 [node name="Level" parent="." instance=ExtResource("2_73jjw")]
 
 [node name="Level2" parent="." instance=ExtResource("3_nfi1l")]
+
+[connection signal="LevelChange" from="." to="." method="_on_level_change"]
