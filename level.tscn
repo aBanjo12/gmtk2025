@@ -37,22 +37,18 @@ scale = Vector2(-1, 1)
 polygon = PackedVector2Array(-0.377563, 0.096611, -0.377563, 192.097, -80.3776, 192.097, -80.3776, 224.097, 31.6224, 224.097, 31.6224, -31.9034, -80.3776, -31.9034, -80.3776, 0.096611)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-visible = false
 position = Vector2(112, 0)
 texture = SubResource("PlaceholderTexture2D_vonw3")
 
 [node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
-visible = false
 position = Vector2(-112, 0)
 texture = SubResource("PlaceholderTexture2D_oi3di")
 
 [node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
-visible = false
 position = Vector2(0, -112)
 texture = SubResource("PlaceholderTexture2D_0b4ue")
 
 [node name="Sprite2D4" type="Sprite2D" parent="StaticBody2D"]
-visible = false
 position = Vector2(1, 112)
 texture = SubResource("PlaceholderTexture2D_f2txt")
 
