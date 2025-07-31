@@ -24,12 +24,6 @@ public partial class LevelLoader : Node2D
         ReadyLevelExit(activeLevel);
         
     }
-
-    public override void _Process(double delta)
-    {
-
-    }
-
     public void OnBodyEntered(Node2D body)
     {
         GD.Print("A");
