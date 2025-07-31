@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://fbo84spe20k3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vonw3"]
+size = Vector2(20, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oi3di"]
+size = Vector2(20, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0b4ue"]
+size = Vector2(216, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2txt"]
+size = Vector2(216, 20)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5xgho"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_u52ul"]
+
+[node name="Level" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-118, 0)
+shape = SubResource("RectangleShape2D_vonw3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(118, 0)
+shape = SubResource("RectangleShape2D_oi3di")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -118)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 118)
+shape = SubResource("RectangleShape2D_f2txt")
+
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(117.625, -7.62939e-06)
+scale = Vector2(20.75, 256)
+texture = SubResource("PlaceholderTexture2D_5xgho")
+
+[node name="Sprite2D5" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-118, 0)
+scale = Vector2(20.75, 256)
+texture = SubResource("PlaceholderTexture2D_5xgho")
+
+[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-0.500004, 118)
+scale = Vector2(215, 20)
+texture = SubResource("PlaceholderTexture2D_u52ul")
+
+[node name="Sprite2D4" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(0, -118)
+scale = Vector2(215, 20)
+texture = SubResource("PlaceholderTexture2D_u52ul")
