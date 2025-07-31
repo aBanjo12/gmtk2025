@@ -1,6 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://fbo84spe20k3"]
-
-[ext_resource type="Script" uid="uid://dqew7motnqev8" path="res://exit.cs" id="2_vonw3"]
+[gd_scene load_steps=8 format=3 uid="uid://fbo84spe20k3"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vonw3"]
 size = Vector2(32, 256)
@@ -61,7 +59,6 @@ position = Vector2(0, 112)
 shape = SubResource("RectangleShape2D_vonw3")
 
 [node name="Exit" type="Area2D" parent="."]
-script = ExtResource("2_vonw3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
 position = Vector2(0, -51)

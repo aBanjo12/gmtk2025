@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpxqkhx1da1k"]
+
+[ext_resource type="Script" uid="uid://djmqlyk01iqyc" path="res://LevelLoader.cs" id="1_ox13j"]
+[ext_resource type="PackedScene" uid="uid://fbo84spe20k3" path="res://level.tscn" id="2_73jjw"]
+[ext_resource type="PackedScene" uid="uid://bynxylyjwneh0" path="res://level2.tscn" id="3_nfi1l"]
+
+[node name="LevelLoader" type="Node2D"]
+script = ExtResource("1_ox13j")
+levelArrayNodePath = Array[NodePath]([NodePath("Level"), NodePath("Level2")])
+
+[node name="Level" parent="." instance=ExtResource("2_73jjw")]
+
+[node name="Level2" parent="." instance=ExtResource("3_nfi1l")]
