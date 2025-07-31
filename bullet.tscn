@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bydk0pdh7thsi"]
+[gd_scene load_steps=4 format=3 uid="uid://bydk0pdh7thsi"]
 
 [ext_resource type="Script" uid="uid://bc5521io1osm1" path="res://BulletMover.cs" id="1_v7oki"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rtl8c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7oki"]
+size = Vector2(1, 1)
 
 [node name="Bullet" type="Node2D"]
 script = ExtResource("1_v7oki")
@@ -11,3 +14,9 @@ Speed = 100.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(8, 8)
 texture = SubResource("PlaceholderTexture2D_rtl8c")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(7.98737, 8)
+shape = SubResource("RectangleShape2D_v7oki")
