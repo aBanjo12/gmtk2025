@@ -71,7 +71,7 @@ public partial class PlayerControl : CharacterBody2D
 	public void HandleHurtPlayer()
 	{
 		PlayerHealth--;
-		GD.Print("player hurt " + PlayerHealth);
+		//GD.Print("player hurt " + PlayerHealth);
 		if (PlayerHealth <= 0)
 			PlayerDie();
 	}
