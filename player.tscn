@@ -32,7 +32,6 @@ EnemyLayerMask = 2
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-visible = false
 scale = Vector2(32, 32)
 texture = SubResource("PlaceholderTexture2D_05hpe")
 

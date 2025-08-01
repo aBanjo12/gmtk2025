@@ -72,8 +72,6 @@ public partial class LevelLoader : Node2D
         var block = level.GetNode<StaticBody2D>("OuterWalls").GetNode<CollisionShape2D>("ExitBlock");
         block.Disabled = true;
         block.Visible = false;
-
-        GD.Print(block);
     }
 
     public void OnBodyEntered(Node2D body)

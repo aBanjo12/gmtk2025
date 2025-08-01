@@ -112,8 +112,13 @@ public partial class PlayerControl : CharacterBody2D
 
 	public void OnBodyEntered(Node2D body)
 	{
+		if (body.GetParent().Name == "Bullet" && !((BulletMover)body.GetParent()).CanHitPlayer)
+		{
+			GD.Print("A");
+			return;
+		}
 		PlayerHealth--;
-		//GD.Print("player hurt " + PlayerHealth);
+		GD.Print("player hurt " + PlayerHealth);
 		if (PlayerHealth <= 0)
 			PlayerDie();
 		

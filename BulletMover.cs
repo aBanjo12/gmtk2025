@@ -5,16 +5,24 @@ public partial class BulletMover : Node2D
 {
 	[Export] public Vector2 Angle;
 	[Export] public float Speed;
-	
+
 	[Export] public int WallLayerMask;
 
 	[Export] public RayCast2D North;
 	[Export] public RayCast2D South;
 	[Export] public RayCast2D East;
 	[Export] public RayCast2D West;
-	
+
+	public bool CanHitPlayer = false;
+
 	private int yCooldown = 0;
 	private int xCooldown = 0;
+
+	public override void _Ready()
+	{
+		var hurtBox = GetTree().Root.GetNode<Node2D>("GameScene/Player/CharacterBody2D").GetNode<Area2D>("HurtBox");
+		hurtBox.BodyExited += OnBodyExit;
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -29,12 +37,15 @@ public partial class BulletMover : Node2D
 			xCooldown = 3;
 			Angle.X = -Angle.X;
 		}
-		
+
 		if (yCooldown > 0)
 			yCooldown--;
 		if (xCooldown > 0)
 			xCooldown--;
 	}
-	
-	
+
+	public void OnBodyExit(Node2D body)
+	{
+		CanHitPlayer = true;
+	}
 }

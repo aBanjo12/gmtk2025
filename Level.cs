@@ -16,11 +16,9 @@ public partial class Level : Node2D
         {
             if (i.IsInGroup("Enemy"))
             {
-                GD.Print("A");
                 enemies.Add((Node2D)i);
             }
         }
-        GD.Print("E: " + enemies.Count());
     }
 
     public override void _Process(double delta)
