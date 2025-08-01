@@ -1,27 +1,30 @@
-[gd_scene load_steps=12 format=3 uid="uid://fbo84spe20k3"]
+[gd_scene load_steps=13 format=3 uid="uid://fbo84spe20k3"]
 
 [ext_resource type="Script" uid="uid://ngn2yu3hgdlm" path="res://Level.cs" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://dk3m1rwvmxvth" path="res://enemy.tscn" id="2_vonw3"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vonw3"]
-size = Vector2(32, 256)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_oi3di"]
-size = Vector2(32, 256)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0b4ue"]
-size = Vector2(256, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vonw3"]
+size = Vector2(32, 32)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_f2txt"]
-size = Vector2(256, 32)
+size = Vector2(32, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vonw3"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1ainy"]
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oi3di"]
 size = Vector2(112, 32)
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0b4ue"]
+size = Vector2(112, 32)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0b4ue"]
+size = Vector2(32, 192)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vonw3"]
+size = Vector2(32, 192)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_oi3di"]
 size = Vector2(32, 192)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u52ul"]
@@ -36,53 +39,62 @@ script = ExtResource("1_vonw3")
 [node name="OuterWalls" type="StaticBody2D" parent="."]
 collision_layer = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="OuterWalls"]
-position = Vector2(112, 0)
-texture = SubResource("PlaceholderTexture2D_vonw3")
-
-[node name="Sprite2D2" type="Sprite2D" parent="OuterWalls"]
-position = Vector2(-112, 0)
-texture = SubResource("PlaceholderTexture2D_oi3di")
-
-[node name="Sprite2D3" type="Sprite2D" parent="OuterWalls"]
+[node name="ExitBlock" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(0, -112)
-texture = SubResource("PlaceholderTexture2D_0b4ue")
+shape = SubResource("RectangleShape2D_vonw3")
 
-[node name="Sprite2D4" type="Sprite2D" parent="OuterWalls"]
-position = Vector2(0, 112)
+[node name="Sprite2D" type="Sprite2D" parent="OuterWalls/ExitBlock"]
 texture = SubResource("PlaceholderTexture2D_f2txt")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OuterWalls"]
-position = Vector2(0, -112)
-shape = SubResource("RectangleShape2D_vonw3")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="OuterWalls"]
+[node name="EntranceBlock" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(0, 112)
 shape = SubResource("RectangleShape2D_vonw3")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="OuterWalls"]
+[node name="Sprite2D" type="Sprite2D" parent="OuterWalls/EntranceBlock"]
+texture = SubResource("PlaceholderTexture2D_1ainy")
+
+[node name="BottomRight" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(72, 112)
 shape = SubResource("RectangleShape2D_oi3di")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="OuterWalls"]
+[node name="Sprite2D7" type="Sprite2D" parent="OuterWalls/BottomRight"]
+texture = SubResource("PlaceholderTexture2D_0b4ue")
+
+[node name="BottomLeft" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(-72, 112)
 shape = SubResource("RectangleShape2D_oi3di")
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="OuterWalls"]
+[node name="Sprite2D6" type="Sprite2D" parent="OuterWalls/BottomLeft"]
+position = Vector2(1, 0)
+texture = SubResource("PlaceholderTexture2D_0b4ue")
+
+[node name="TopLeft" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(-72, -112)
 shape = SubResource("RectangleShape2D_oi3di")
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="OuterWalls"]
+[node name="Sprite2D3" type="Sprite2D" parent="OuterWalls/TopLeft"]
+texture = SubResource("PlaceholderTexture2D_0b4ue")
+
+[node name="TopRight" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(72, -112)
 shape = SubResource("RectangleShape2D_oi3di")
 
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="OuterWalls"]
+[node name="Sprite2D5" type="Sprite2D" parent="OuterWalls/TopRight"]
+texture = SubResource("PlaceholderTexture2D_0b4ue")
+
+[node name="Right" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(112, 0)
 shape = SubResource("RectangleShape2D_0b4ue")
 
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="OuterWalls"]
+[node name="Sprite2D" type="Sprite2D" parent="OuterWalls/Right"]
+texture = SubResource("PlaceholderTexture2D_vonw3")
+
+[node name="Left" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(-112, 0)
 shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="Sprite2D2" type="Sprite2D" parent="OuterWalls/Left"]
+texture = SubResource("PlaceholderTexture2D_oi3di")
 
 [node name="Exit" type="Area2D" parent="."]
 position = Vector2(0, -93)

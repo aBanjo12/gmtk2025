@@ -28,7 +28,7 @@ public partial class LevelLoader : Node2D
         activeLevel = levelArr[0];
         ConnectEnemiesDead(activeLevel);
         ConnectLevelExit(activeLevel);
-        DisableExit();
+        ShowExitBlock(activeLevel);
 
         timer = GetNode<Timer>("Timer");
         timer.Timeout += OnTimerTimout;
@@ -46,7 +46,7 @@ public partial class LevelLoader : Node2D
 
         ConnectEnemiesDead(activeLevel);
         ConnectLevelExit(activeLevel);
-        DisableExit();
+        ShowExitBlock(activeLevel);
     }
 
     public void ConnectLevelExit(Node2D level)
@@ -60,16 +60,20 @@ public partial class LevelLoader : Node2D
         ((Level)level).EnemiesDead += OnLevelEnemiesDead;
     }
 
-    public void EnableExit()
+    public void ShowExitBlock(Node2D level)
     {
-        exit.ProcessMode = ProcessModeEnum.Always;
-        exit.Visible = true;
+        var block = level.GetNode<StaticBody2D>("OuterWalls").GetNode<CollisionShape2D>("ExitBlock");
+        block.Disabled = false;
+        block.Visible = true;
     }
 
-    public void DisableExit()
+    public void HideExitBlock(Node2D level)
     {
-        exit.ProcessMode = ProcessModeEnum.Disabled;
-        exit.Visible = false;
+        var block = level.GetNode<StaticBody2D>("OuterWalls").GetNode<CollisionShape2D>("ExitBlock");
+        block.Disabled = true;
+        block.Visible = false;
+
+        GD.Print(block);
     }
 
     public void OnBodyEntered(Node2D body)
@@ -87,7 +91,8 @@ public partial class LevelLoader : Node2D
 
     public void OnLevelEnemiesDead()
     {
-        EnableExit();
+        HideExitBlock(activeLevel);
+        GD.Print("Enemies dead");
     }
 
     public void OnTimerTimout()
