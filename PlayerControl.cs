@@ -13,17 +13,26 @@ public partial class PlayerControl : CharacterBody2D
 	[Export] public Key RightKey;
 
 	[Export] public uint PlayerHealth;
-	
+
 	[Export] public CollisionShape2D MyShape;
 	[Export] public int EnemyLayerMask;
-	
+
 	[Signal]
 	public delegate void HurtPlayerEventHandler();
+
+	Area2D hurtbox;
+	Timer timer;
 
 	public override void _Ready()
 	{
 		LevelLoader levelLoader = GetTree().Root.GetNode<LevelLoader>("GameScene/LevelLoader");
 		levelLoader.LevelChange += OnLevelChange;
+
+		hurtbox = GetNode<Area2D>("HurtBox");
+		hurtbox.BodyEntered += OnBodyEntered;
+
+		timer = GetNode<Timer>("Timer");
+		timer.Timeout += Timout;
 
 		HurtPlayer += HandleHurtPlayer;
 
@@ -51,10 +60,10 @@ public partial class PlayerControl : CharacterBody2D
 		Velocity = movement * Speed;
 		MoveAndSlide();
 
-		if (IsInsideTargetShape())
-		{
-			EmitSignal(SignalName.HurtPlayer);
-		}
+		// if (IsInsideTargetShape())
+		// {
+		// 	EmitSignal(SignalName.HurtPlayer);
+		// }
 
 	}
 
@@ -80,7 +89,7 @@ public partial class PlayerControl : CharacterBody2D
 	{
 		GD.Print("player dead");
 	}
-	
+
 	private bool IsInsideTargetShape()
 	{
 		if (MyShape == null || MyShape.Shape == null)
@@ -101,4 +110,24 @@ public partial class PlayerControl : CharacterBody2D
 		return results.Count > 0;
 	}
 
+	public void OnBodyEntered(Node2D body)
+	{
+		PlayerHealth--;
+		//GD.Print("player hurt " + PlayerHealth);
+		if (PlayerHealth <= 0)
+			PlayerDie();
+		
+		CallDeferred("DisableHurtbox");
+	}
+
+	public void DisableHurtbox()
+	{
+		hurtbox.ProcessMode = ProcessModeEnum.Disabled;
+		timer.Start();
+	}
+
+	public void Timout()
+	{
+		hurtbox.ProcessMode = ProcessModeEnum.Always;
+	}
 }

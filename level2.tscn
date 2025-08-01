@@ -77,6 +77,7 @@ position = Vector2(0, 112)
 shape = SubResource("RectangleShape2D_8i3m3")
 
 [node name="Exit" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
 position = Vector2(0, -51)
