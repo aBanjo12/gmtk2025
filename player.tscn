@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dq4fvvs7qpp00" path="res://PlayerControl.cs" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://6hp1y3lw2e1i" path="res://gun.tscn" id="2_onrkg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mlf6e"]
-size = Vector2(1, 1)
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
+radius = 16.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_05hpe"]
 
@@ -29,8 +29,7 @@ MyShape = NodePath("CollisionShape2D")
 EnemyLayerMask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-scale = Vector2(32, 32)
-shape = SubResource("RectangleShape2D_mlf6e")
+shape = SubResource("CircleShape2D_i3pqv")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(32, 32)

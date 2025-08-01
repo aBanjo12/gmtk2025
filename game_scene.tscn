@@ -12,5 +12,6 @@
 position = Vector2(507, 303)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.6, 2.6)
 
 [node name="LevelLoader" parent="." instance=ExtResource("4_mj2jn")]

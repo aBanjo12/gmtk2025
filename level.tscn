@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://fbo84spe20k3"]
+[gd_scene load_steps=12 format=3 uid="uid://fbo84spe20k3"]
 
 [ext_resource type="Script" uid="uid://ngn2yu3hgdlm" path="res://Level.cs" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://dk3m1rwvmxvth" path="res://enemy.tscn" id="2_vonw3"]
@@ -18,6 +18,12 @@ size = Vector2(256, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vonw3"]
 size = Vector2(32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oi3di"]
+size = Vector2(112, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0b4ue"]
+size = Vector2(32, 192)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u52ul"]
 size = Vector2(32, 32)
 
@@ -27,43 +33,59 @@ size = Vector2(32, 32)
 [node name="Level" type="Node2D"]
 script = ExtResource("1_vonw3")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="OuterWalls" type="StaticBody2D" parent="."]
 collision_layer = 2
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(96, -96)
-polygon = PackedVector2Array(-0.377563, 0.096611, -0.377563, 192.097, -80.3776, 192.097, -80.3776, 224.097, 31.6224, 224.097, 31.6224, -31.9034, -80.3776, -31.9034, -80.3776, 0.096611)
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(-96, -96)
-scale = Vector2(-1, 1)
-polygon = PackedVector2Array(-0.377563, 0.096611, -0.377563, 192.097, -80.3776, 192.097, -80.3776, 224.097, 31.6224, 224.097, 31.6224, -31.9034, -80.3776, -31.9034, -80.3776, 0.096611)
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="OuterWalls"]
 position = Vector2(112, 0)
 texture = SubResource("PlaceholderTexture2D_vonw3")
 
-[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D2" type="Sprite2D" parent="OuterWalls"]
 position = Vector2(-112, 0)
 texture = SubResource("PlaceholderTexture2D_oi3di")
 
-[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D3" type="Sprite2D" parent="OuterWalls"]
 position = Vector2(0, -112)
 texture = SubResource("PlaceholderTexture2D_0b4ue")
 
-[node name="Sprite2D4" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(1, 112)
+[node name="Sprite2D4" type="Sprite2D" parent="OuterWalls"]
+position = Vector2(0, 112)
 texture = SubResource("PlaceholderTexture2D_f2txt")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(0, -112)
 shape = SubResource("RectangleShape2D_vonw3")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(0, 112)
 shape = SubResource("RectangleShape2D_vonw3")
 
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="OuterWalls"]
+position = Vector2(72, 112)
+shape = SubResource("RectangleShape2D_oi3di")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="OuterWalls"]
+position = Vector2(-72, 112)
+shape = SubResource("RectangleShape2D_oi3di")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="OuterWalls"]
+position = Vector2(-72, -112)
+shape = SubResource("RectangleShape2D_oi3di")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="OuterWalls"]
+position = Vector2(72, -112)
+shape = SubResource("RectangleShape2D_oi3di")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="OuterWalls"]
+position = Vector2(112, 0)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="OuterWalls"]
+position = Vector2(-112, 0)
+shape = SubResource("RectangleShape2D_0b4ue")
+
 [node name="Exit" type="Area2D" parent="."]
+position = Vector2(0, -93)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
