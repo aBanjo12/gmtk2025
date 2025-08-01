@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://cbnhqk4v6fy47" path="res://enemy.cs" id="1_7k104"]
 [ext_resource type="Texture2D" uid="uid://bdxkh8mjjnovo" path="res://slime.png" id="2_4gyqm"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
-size = Vector2(1, 1)
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gyqm"]
+radius = 6.0
 
 [node name="enemy" type="Node2D"]
 
@@ -14,9 +14,9 @@ collision_mask = 3
 script = ExtResource("1_7k104")
 Speed = 30.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-scale = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_4gyqm")
-
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 texture = ExtResource("2_4gyqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_4gyqm")
