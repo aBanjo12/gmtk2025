@@ -5,6 +5,7 @@ public partial class Enemy : CharacterBody2D
 {
 	[Export] public float Speed;
 	[Export] public int Health = 10;
+	public bool dead = false;
 
 	Area2D hurtbox;
 	Timer timer;
@@ -62,5 +63,6 @@ public partial class Enemy : CharacterBody2D
 	{
 		ProcessMode = ProcessModeEnum.Disabled;
 		Visible = false;
+		dead = true;
 	}
 }

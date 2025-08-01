@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bynxylyjwneh0"]
+[gd_scene load_steps=12 format=3 uid="uid://bynxylyjwneh0"]
 
+[ext_resource type="Script" uid="uid://ngn2yu3hgdlm" path="res://Level.cs" id="1_r40rm"]
 [ext_resource type="PackedScene" uid="uid://dk3m1rwvmxvth" path="res://enemy.tscn" id="1_y0xe8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ocsrq"]
@@ -30,6 +31,7 @@ size = Vector2(32, 32)
 size = Vector2(32, 32)
 
 [node name="Level2" type="Node2D"]
+script = ExtResource("1_r40rm")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -87,7 +89,7 @@ shape = SubResource("RectangleShape2D_y0xe8")
 position = Vector2(0, -51)
 texture = SubResource("PlaceholderTexture2D_r40rm")
 
-[node name="enemy" parent="." instance=ExtResource("1_y0xe8")]
+[node name="enemy" parent="." groups=["Enemy"] instance=ExtResource("1_y0xe8")]
 position = Vector2(-2, -27)
 
 [connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]

@@ -17,4 +17,5 @@ wait_time = 0.5
 one_shot = true
 
 [connection signal="LevelChange" from="." to="." method="_on_level_change"]
+[connection signal="EnemiesDead" from="Level" to="." method="_on_level_enemies_dead"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

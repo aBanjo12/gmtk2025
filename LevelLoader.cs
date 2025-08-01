@@ -9,8 +9,8 @@ public partial class LevelLoader : Node2D
 
     Node2D[] levelArr;
     Node2D activeLevel;
-
     Timer timer;
+    Area2D exit;
     bool canChangeLevel = true;
 
     public override void _Ready()
@@ -26,11 +26,52 @@ public partial class LevelLoader : Node2D
             }
         }
         activeLevel = levelArr[0];
-        ReadyLevelExit(activeLevel);
+        ConnectEnemiesDead(activeLevel);
+        ConnectLevelExit(activeLevel);
+        DisableExit();
 
         timer = GetNode<Timer>("Timer");
         timer.Timeout += OnTimerTimout;
     }
+
+    public void GoToNextLevel(Node2D nextLevel)
+    {
+        activeLevel.ProcessMode = ProcessModeEnum.Disabled;
+        activeLevel.Visible = false;
+        exit.BodyEntered -= OnBodyEntered;
+
+        activeLevel = nextLevel;
+        activeLevel.ProcessMode = ProcessModeEnum.Always;
+        activeLevel.Visible = true;
+
+        ConnectEnemiesDead(activeLevel);
+        ConnectLevelExit(activeLevel);
+        DisableExit();
+    }
+
+    public void ConnectLevelExit(Node2D level)
+    {
+        exit = level.GetNode<Area2D>("Exit");
+        exit.BodyEntered += OnBodyEntered;
+    }
+
+    public void ConnectEnemiesDead(Node2D level)
+    {
+        ((Level)level).EnemiesDead += OnLevelEnemiesDead;
+    }
+
+    public void EnableExit()
+    {
+        exit.ProcessMode = ProcessModeEnum.Always;
+        exit.Visible = true;
+    }
+
+    public void DisableExit()
+    {
+        exit.ProcessMode = ProcessModeEnum.Disabled;
+        exit.Visible = false;
+    }
+
     public void OnBodyEntered(Node2D body)
     {
         if (canChangeLevel)
@@ -44,26 +85,13 @@ public partial class LevelLoader : Node2D
         }
     }
 
-    public void GoToNextLevel(Node2D nextLevel)
+    public void OnLevelEnemiesDead()
     {
-        activeLevel.ProcessMode = ProcessModeEnum.Disabled;
-        activeLevel.Visible = false;
-        activeLevel.GetNode<Area2D>("Exit").BodyEntered -= OnBodyEntered;
-
-        activeLevel = nextLevel;
-        activeLevel.ProcessMode = ProcessModeEnum.Always;
-        activeLevel.Visible = true;
-
-        ReadyLevelExit(activeLevel);
+        EnableExit();
     }
 
-    public void ReadyLevelExit(Node2D level)
+    public void OnTimerTimout()
     {
-        Area2D exit = level.GetNode<Area2D>("Exit");
-        exit.BodyEntered += OnBodyEntered;
-    }
-
-    public void OnTimerTimout() {
         canChangeLevel = true;
     }
 }

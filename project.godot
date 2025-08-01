@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="gmtk2025"
 
+[global_group]
+
+Enemy=""
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

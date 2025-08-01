@@ -35,8 +35,6 @@ public partial class GunScript : Node2D
 			float fireInterval = 1.0f / FireRate;
 			if (timeSinceLastShot >= fireInterval)
 			{
-				GD.Print("firing");
-
 				FireBullet();
 				timeSinceLastShot = 0f;
 			}
