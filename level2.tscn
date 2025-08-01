@@ -1,9 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://bynxylyjwneh0"]
+[gd_scene load_steps=11 format=3 uid="uid://bynxylyjwneh0"]
+
+[ext_resource type="PackedScene" uid="uid://dk3m1rwvmxvth" path="res://enemy.tscn" id="1_y0xe8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ocsrq"]
 size = Vector2(32, 32)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y0xe8"]
+size = Vector2(32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6q4t8"]
+size = Vector2(32, 256)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8tcn8"]
+size = Vector2(32, 256)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_r6vdu"]
+size = Vector2(256, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_21xmu"]
+size = Vector2(256, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8i3m3"]
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y0xe8"]
@@ -15,12 +32,49 @@ size = Vector2(32, 32)
 [node name="Level2" type="Node2D"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_ocsrq")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 texture = SubResource("PlaceholderTexture2D_y0xe8")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+position = Vector2(96, -96)
+polygon = PackedVector2Array(-0.377563, 0.096611, -0.377563, 192.097, -80.3776, 192.097, -80.3776, 224.097, 31.6224, 224.097, 31.6224, -31.9034, -80.3776, -31.9034, -80.3776, 0.096611)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D2"]
+position = Vector2(-96, -96)
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(-0.377563, 0.096611, -0.377563, 192.097, -80.3776, 192.097, -80.3776, 224.097, 31.6224, 224.097, 31.6224, -31.9034, -80.3776, -31.9034, -80.3776, 0.096611)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(112, 0)
+texture = SubResource("PlaceholderTexture2D_6q4t8")
+
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(-112, 0)
+texture = SubResource("PlaceholderTexture2D_8tcn8")
+
+[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(0, -112)
+texture = SubResource("PlaceholderTexture2D_r6vdu")
+
+[node name="Sprite2D4" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(1, 112)
+texture = SubResource("PlaceholderTexture2D_21xmu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(0, -112)
+shape = SubResource("RectangleShape2D_8i3m3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(0, 112)
+shape = SubResource("RectangleShape2D_8i3m3")
 
 [node name="Exit" type="Area2D" parent="."]
 
@@ -31,5 +85,8 @@ shape = SubResource("RectangleShape2D_y0xe8")
 [node name="Sprite2D" type="Sprite2D" parent="Exit"]
 position = Vector2(0, -51)
 texture = SubResource("PlaceholderTexture2D_r40rm")
+
+[node name="enemy" parent="." instance=ExtResource("1_y0xe8")]
+position = Vector2(-2, -27)
 
 [connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]

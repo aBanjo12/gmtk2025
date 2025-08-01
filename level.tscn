@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://fbo84spe20k3"]
+[gd_scene load_steps=9 format=3 uid="uid://fbo84spe20k3"]
+
+[ext_resource type="PackedScene" uid="uid://dk3m1rwvmxvth" path="res://enemy.tscn" id="2_vonw3"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vonw3"]
 size = Vector2(32, 256)
@@ -68,5 +70,11 @@ shape = SubResource("RectangleShape2D_u52ul")
 [node name="Sprite2D" type="Sprite2D" parent="Exit"]
 position = Vector2(0, -51)
 texture = SubResource("PlaceholderTexture2D_u52ul")
+
+[node name="enemy" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(-82, -84)
+
+[node name="enemy2" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(82, -81)
 
 [connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]

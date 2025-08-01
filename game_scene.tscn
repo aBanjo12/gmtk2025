@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://chw5gs6st4uox"]
+[gd_scene load_steps=4 format=3 uid="uid://chw5gs6st4uox"]
 
 [ext_resource type="PackedScene" uid="uid://d1e8yna1iwog6" path="res://player.tscn" id="1_mlf6e"]
 [ext_resource type="PackedScene" uid="uid://bydk0pdh7thsi" path="res://bullet.tscn" id="2_po0ka"]
-[ext_resource type="PackedScene" uid="uid://dk3m1rwvmxvth" path="res://enemy.tscn" id="4_mixcd"]
 [ext_resource type="PackedScene" uid="uid://bpxqkhx1da1k" path="res://level_loader.tscn" id="4_mj2jn"]
 
 [node name="GameScene" type="Node"]
@@ -13,7 +12,5 @@
 position = Vector2(507, 303)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Enemy" parent="." instance=ExtResource("4_mixcd")]
 
 [node name="LevelLoader" parent="." instance=ExtResource("4_mj2jn")]

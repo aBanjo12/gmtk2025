@@ -12,4 +12,9 @@ levelArrayNodePath = Array[NodePath]([NodePath("Level"), NodePath("Level2")])
 
 [node name="Level2" parent="." instance=ExtResource("3_nfi1l")]
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="LevelChange" from="." to="." method="_on_level_change"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

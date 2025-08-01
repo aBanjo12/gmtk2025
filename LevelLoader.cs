@@ -9,6 +9,10 @@ public partial class LevelLoader : Node2D
 
     Node2D[] levelArr;
     Node2D activeLevel;
+
+    Timer timer;
+    bool canChangeLevel = true;
+
     public override void _Ready()
     {
         levelArr = new Node2D[levelArrayNodePath.Length];
@@ -23,11 +27,21 @@ public partial class LevelLoader : Node2D
         }
         activeLevel = levelArr[0];
         ReadyLevelExit(activeLevel);
+
+        timer = GetNode<Timer>("Timer");
+        timer.Timeout += OnTimerTimout;
     }
     public void OnBodyEntered(Node2D body)
     {
-        GD.Print("Level Change");
-        CallDeferred("GoToNextLevel", levelArr[1]);
+        if (canChangeLevel)
+        {
+            GD.Print("Level Change");
+            EmitSignal(SignalName.LevelChange);
+
+            CallDeferred("GoToNextLevel", levelArr[1]);
+            canChangeLevel = false;
+            timer.Start();
+        }
     }
 
     public void GoToNextLevel(Node2D nextLevel)
@@ -39,13 +53,17 @@ public partial class LevelLoader : Node2D
         activeLevel = nextLevel;
         activeLevel.ProcessMode = ProcessModeEnum.Always;
         activeLevel.Visible = true;
+
         ReadyLevelExit(activeLevel);
-        EmitSignal(SignalName.LevelChange);
     }
 
     public void ReadyLevelExit(Node2D level)
     {
         Area2D exit = level.GetNode<Area2D>("Exit");
         exit.BodyEntered += OnBodyEntered;
+    }
+
+    public void OnTimerTimout() {
+        canChangeLevel = true;
     }
 }
