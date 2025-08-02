@@ -9,8 +9,6 @@ public partial class GunScript : Node2D
 
 	private float timeSinceLastShot = 0f;
 	
-	[Export] public CharacterBody2D FollowTarget;
-
 	private Node root;
 	private PackedScene bulletScene;
 
@@ -28,7 +26,6 @@ public partial class GunScript : Node2D
 		direction = mousePosition - GlobalPosition;
 		float angle = direction.Angle();
 		Rotation = angle + (float)Math.PI/2;
-		Position = new Vector2(FollowTarget.Transform.Origin.X, FollowTarget.Transform.Origin.Y);
 
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
@@ -48,6 +45,6 @@ public partial class GunScript : Node2D
 		BulletMover mover = bullet as BulletMover;
 		mover.Position = GlobalPosition;
 		mover.Angle = direction.Normalized();
-		GetTree().Root.AddChild(bullet);
+		GetTree().Root.GetNode("GameScene").AddChild(bullet);
 	}
 }

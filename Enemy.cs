@@ -20,7 +20,7 @@ public partial class Enemy : CharacterBody2D
 
 	public override void _Ready()
 	{
-		player = (PlayerControl)GetTree().Root.GetNode("GameScene/Player").GetNode("CharacterBody2D");
+		player = (PlayerControl)GetTree().Root.GetNode("GameScene/Player");
 
 		hurtbox = GetNode<Area2D>("HurtBox");
 		hurtbox.BodyEntered += OnBodyEntered;
@@ -31,8 +31,8 @@ public partial class Enemy : CharacterBody2D
 		timer = GetNode<Timer>("Timer");
 		timer.Timeout += Timout;
 
-        atkTimer = GetNode<Timer>("AttackTimer");
-        atkTimer.Timeout += OnAttackTimerTimout;
+		atkTimer = GetNode<Timer>("AttackTimer");
+		atkTimer.Timeout += OnAttackTimerTimout;
 		GD.Print(atkTimer);
 
 		animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -109,9 +109,9 @@ public partial class Enemy : CharacterBody2D
 	}
 
 	public void OnAttackTimerTimout()
-    {
+	{
 		canAttack = true;
-    }
+	}
 
 	public void Die()
 	{

@@ -21,7 +21,6 @@ public partial class PlayerControl : CharacterBody2D
 	public delegate void HurtPlayerEventHandler();
 
 	Area2D hurtbox;
-	Area2D bulletLeave;
 	Timer timer;
 
 	public override void _Ready()
@@ -32,13 +31,11 @@ public partial class PlayerControl : CharacterBody2D
 		hurtbox = GetNode<Area2D>("HurtBox");
 		hurtbox.BodyEntered += OnBodyEntered;
 
-		bulletLeave = GetNode<Area2D>("BulletLeave");
-		bulletLeave.BodyExited += OnBodyExited;
-
 		timer = GetNode<Timer>("Timer");
 		timer.Timeout += Timout;
 
 		HurtPlayer += HandleHurtPlayer;
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -115,8 +112,9 @@ public partial class PlayerControl : CharacterBody2D
 
 	public void OnBodyEntered(Node2D body)
 	{
-		if (!((BulletMover)body.GetParent()).CanHitPlayer)
+		if (body.GetParent().Name == "Bullet" && !((BulletMover)body.GetParent()).CanHitPlayer)
 		{
+			GD.Print("A");
 			return;
 		}
 		PlayerHealth--;
@@ -125,11 +123,6 @@ public partial class PlayerControl : CharacterBody2D
 			PlayerDie();
 		
 		CallDeferred("DisableHurtbox");
-	}
-
-	public void OnBodyExited(Node2D body)
-	{
-		((BulletMover)body.GetParent()).CanHitPlayer = true;
 	}
 
 	public void DisableHurtbox()

@@ -1,23 +1,25 @@
-[gd_scene load_steps=14 format=3 uid="uid://fbo84spe20k3"]
+[gd_scene load_steps=23 format=4 uid="uid://fbo84spe20k3"]
 
 [ext_resource type="Script" uid="uid://ngn2yu3hgdlm" path="res://Level.cs" id="1_vonw3"]
+[ext_resource type="Texture2D" uid="uid://dsaeg6eo3evrr" path="res://exitSprite.png" id="2_f2txt"]
 [ext_resource type="PackedScene" uid="uid://dk3m1rwvmxvth" path="res://enemy.tscn" id="2_vonw3"]
-[ext_resource type="PackedScene" uid="uid://b8pkksumqpbwo" path="res://skeleton.tscn" id="3_oi3di"]
+[ext_resource type="Texture2D" uid="uid://clgwrtpdwjvt0" path="res://levelTiles.png" id="3_0b4ue"]
+[ext_resource type="Texture2D" uid="uid://cblsn0qixn80q" path="res://tiles.png" id="3_oi3di"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vonw3"]
-size = Vector2(32, 32)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_f2txt"]
-size = Vector2(32, 32)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1ainy"]
-size = Vector2(32, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oi3di"]
-size = Vector2(112, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2txt"]
+size = Vector2(111.503, 32)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0b4ue"]
 size = Vector2(112, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ainy"]
+size = Vector2(112, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oi3di"]
+size = Vector2(95, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6hdu"]
+size = Vector2(95, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0b4ue"]
 size = Vector2(32, 192)
@@ -28,11 +30,74 @@ size = Vector2(32, 192)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_oi3di"]
 size = Vector2(32, 192)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vonw3"]
+size = Vector2(32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1ainy"]
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_km5ld"]
+size = Vector2(66, 32)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u52ul"]
 size = Vector2(32, 32)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_u52ul"]
 size = Vector2(32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f2txt"]
+texture = ExtResource("3_0b4ue")
+texture_region_size = Vector2i(32, 32)
+2:0/0 = 0
+4:0/0 = 0
+6:0/0 = 0
+8:0/0 = 0
+10:0/0 = 0
+12:0/0 = 0
+14:0/0 = 0
+0:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+8:2/0 = 0
+10:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+0:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_1ainy"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_f2txt")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0b4ue"]
+texture = ExtResource("3_oi3di")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_f2txt"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_0b4ue")
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_vonw3")
@@ -40,47 +105,38 @@ script = ExtResource("1_vonw3")
 [node name="OuterWalls" type="StaticBody2D" parent="."]
 collision_layer = 2
 
-[node name="ExitBlock" type="CollisionShape2D" parent="OuterWalls"]
-position = Vector2(0, -112)
-shape = SubResource("RectangleShape2D_vonw3")
-
-[node name="Sprite2D" type="Sprite2D" parent="OuterWalls/ExitBlock"]
-texture = SubResource("PlaceholderTexture2D_f2txt")
-
-[node name="EntranceBlock" type="CollisionShape2D" parent="OuterWalls"]
-position = Vector2(0, 112)
-shape = SubResource("RectangleShape2D_vonw3")
-
-[node name="Sprite2D" type="Sprite2D" parent="OuterWalls/EntranceBlock"]
-texture = SubResource("PlaceholderTexture2D_1ainy")
-
 [node name="BottomRight" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(72, 112)
-shape = SubResource("RectangleShape2D_oi3di")
+scale = Vector2(1.00446, 1)
+shape = SubResource("RectangleShape2D_f2txt")
 
 [node name="Sprite2D7" type="Sprite2D" parent="OuterWalls/BottomRight"]
+visible = false
 texture = SubResource("PlaceholderTexture2D_0b4ue")
 
 [node name="BottomLeft" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(-72, 112)
-shape = SubResource("RectangleShape2D_oi3di")
+shape = SubResource("RectangleShape2D_1ainy")
 
 [node name="Sprite2D6" type="Sprite2D" parent="OuterWalls/BottomLeft"]
+visible = false
 position = Vector2(1, 0)
 texture = SubResource("PlaceholderTexture2D_0b4ue")
 
 [node name="TopLeft" type="CollisionShape2D" parent="OuterWalls"]
-position = Vector2(-72, -112)
+position = Vector2(-80.5, -112)
 shape = SubResource("RectangleShape2D_oi3di")
 
 [node name="Sprite2D3" type="Sprite2D" parent="OuterWalls/TopLeft"]
+visible = false
 texture = SubResource("PlaceholderTexture2D_0b4ue")
 
 [node name="TopRight" type="CollisionShape2D" parent="OuterWalls"]
-position = Vector2(72, -112)
-shape = SubResource("RectangleShape2D_oi3di")
+position = Vector2(80.5, -112)
+shape = SubResource("RectangleShape2D_n6hdu")
 
 [node name="Sprite2D5" type="Sprite2D" parent="OuterWalls/TopRight"]
+visible = false
 texture = SubResource("PlaceholderTexture2D_0b4ue")
 
 [node name="Right" type="CollisionShape2D" parent="OuterWalls"]
@@ -88,6 +144,7 @@ position = Vector2(112, 0)
 shape = SubResource("RectangleShape2D_0b4ue")
 
 [node name="Sprite2D" type="Sprite2D" parent="OuterWalls/Right"]
+visible = false
 texture = SubResource("PlaceholderTexture2D_vonw3")
 
 [node name="Left" type="CollisionShape2D" parent="OuterWalls"]
@@ -95,10 +152,27 @@ position = Vector2(-112, 0)
 shape = SubResource("RectangleShape2D_0b4ue")
 
 [node name="Sprite2D2" type="Sprite2D" parent="OuterWalls/Left"]
+visible = false
 texture = SubResource("PlaceholderTexture2D_oi3di")
+
+[node name="EntranceBlock" type="CollisionShape2D" parent="OuterWalls"]
+position = Vector2(0, 112)
+shape = SubResource("RectangleShape2D_vonw3")
+
+[node name="Sprite2D" type="Sprite2D" parent="OuterWalls/EntranceBlock"]
+visible = false
+texture = SubResource("PlaceholderTexture2D_1ainy")
+
+[node name="ExitBlock" type="CollisionShape2D" parent="OuterWalls"]
+position = Vector2(0, -112)
+shape = SubResource("RectangleShape2D_km5ld")
+
+[node name="Sprite2D" type="Sprite2D" parent="OuterWalls/ExitBlock"]
+texture = ExtResource("2_f2txt")
 
 [node name="Exit" type="Area2D" parent="."]
 position = Vector2(0, -93)
+scale = Vector2(-0.363113, 1.19346)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
@@ -109,10 +183,17 @@ shape = SubResource("RectangleShape2D_u52ul")
 position = Vector2(0, -51)
 texture = SubResource("PlaceholderTexture2D_u52ul")
 
+[node name="Walls" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD8/wMAAAAAAAEAAAD8//z/AAAAAAEAAAADAPz/AAAAAAEAAAADAAMAAAAAAAEAAAD9/wMAAAABAAEAAAD+/wMAAAABAAEAAAD//wMAAAABAAEAAAAAAAMAAAABAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAIAAAABAAEAAFADAAEAAAABAAEAAFADAAAAAAABAAEAAFADAP//AAABAAEAAFADAP7/AAABAAEAAFADAP3/AAABAAEAAGACAPz/AAABAAEAAAABAPz/AAABAAEAAAD+//z/AAABAAEAADD9//z/AAABAAEAADD8//3/AAABAAEAAGD8//7/AAABAAEAAGD8////AAABAAEAAGD8/wAAAAABAAEAAGD8/wEAAAABAAEAAGD8/wIAAAABAAEAAGA=")
+tile_set = SubResource("TileSet_1ainy")
+
+[node name="Ground" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD9//3/AAAAAAAAAAD9//7/AAABAAIAAAD9////AAAAAAIAAAD9/wAAAAACAAIAAAD9/wEAAAACAAAAAAD9/wIAAAABAAAAAAD+//3/AAABAAIAAAD+//7/AAACAAAAAAD+////AAACAAIAAAD+/wAAAAABAAEAAAD+/wEAAAAAAAAAAAD+/wIAAAABAAIAAAD///3/AAACAAIAAAD///7/AAABAAEAAAD/////AAACAAEAAAD//wAAAAAAAAAAAAD//wEAAAAAAAIAAAD//wIAAAABAAIAAAAAAP7/AAABAAAAAAAAAP//AAAAAAEAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAAAAAABAP3/AAACAAEAAAABAP7/AAABAAIAAAABAP//AAABAAEAAAABAAAAAAACAAIAAAABAAEAAAACAAEAAAABAAIAAAABAAAAAAACAP3/AAABAAIAAAACAP7/AAAAAAAAAAACAP//AAAAAAEAAAACAAAAAAABAAIAAAACAAEAAAABAAEAAAACAAIAAAABAAEAAAAAAP3/AAABAAIAAAA=")
+tile_set = SubResource("TileSet_f2txt")
+
 [node name="enemy" parent="." groups=["Enemy"] instance=ExtResource("2_vonw3")]
-position = Vector2(-71, -81)
+position = Vector2(-22, -63)
 
 [node name="enemy2" parent="." groups=["Enemy"] instance=ExtResource("2_vonw3")]
-position = Vector2(64, -80)
-
-[node name="Skeleton" parent="." groups=["Enemy"] instance=ExtResource("3_oi3di")]
+position = Vector2(46, -57)
