@@ -15,9 +15,8 @@ public partial class Enemy : CharacterBody2D
 	bool attacking = false;
 	bool canAttack = true;
 
-	PlayerControl player;
-
-
+	public PlayerControl player;
+	
 	public override void _Ready()
 	{
 		player = (PlayerControl)GetTree().Root.GetNode("GameScene/Player");
@@ -33,7 +32,6 @@ public partial class Enemy : CharacterBody2D
 
 		atkTimer = GetNode<Timer>("AttackTimer");
 		atkTimer.Timeout += OnAttackTimerTimout;
-		GD.Print(atkTimer);
 
 		animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		animation.AnimationFinished += OnAnimationFinished;
@@ -43,7 +41,7 @@ public partial class Enemy : CharacterBody2D
 	{
 		if (attacking)
 		{
-			Attack();
+			// Attack();
 		}
 		else if (!dead)
 		{
@@ -52,7 +50,7 @@ public partial class Enemy : CharacterBody2D
 
 	}
 
-	public void EnemyMovement(double delta)
+	public virtual void EnemyMovement(double delta)
 	{
 		Vector2 playerPos = player.Position;
 		Vector2 posDelta = playerPos - GlobalPosition;
@@ -72,48 +70,49 @@ public partial class Enemy : CharacterBody2D
 		animation.Play("Walking");
 	}
 
-	public void OnBodyEntered(Node2D body)
+	public virtual void OnBodyEntered(Node2D body)
 	{
+		GD.Print("A");
 		Health--;
-		//GD.Print("player hurt " + PlayerHealth);
 		if (Health <= 0)
 			CallDeferred("Die");
 
 		CallDeferred("DisableHurtbox");
 	}
 
-	public void OnPlayerInRange()
+	public virtual void OnPlayerInRange()
 	{
 		if (canAttack)
 		{
 			canAttack = false;
 			atkTimer.Start();
 			attacking = true;
+			Attack();
 		}
 	}
 
-	public void OnAnimationFinished()
+	public virtual void OnAnimationFinished()
 	{
 		attacking = false;
 	}
 
-	public void DisableHurtbox()
+	public virtual void DisableHurtbox()
 	{
 		hurtbox.ProcessMode = ProcessModeEnum.Disabled;
 		timer.Start();
 	}
 
-	public void Timout()
+	public virtual void Timout()
 	{
 		hurtbox.ProcessMode = ProcessModeEnum.Always;
 	}
 
-	public void OnAttackTimerTimout()
-	{
+	public virtual void OnAttackTimerTimout()
+    {
 		canAttack = true;
 	}
 
-	public void Die()
+	public virtual void Die()
 	{
 		// ProcessMode = ProcessModeEnum.Disabled;
 		// Visible = false;
@@ -121,7 +120,7 @@ public partial class Enemy : CharacterBody2D
 		dead = true;
 	}
 
-	public void Attack()
+	public virtual void Attack()
 	{
 		animation.Play("Attacking");
 	}

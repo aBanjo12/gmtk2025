@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bygwcpuvnoyf6"]
+
+[ext_resource type="Script" uid="uid://cxnotwuk10j2w" path="res://Arrow.cs" id="1_l5ahi"]
+[ext_resource type="Texture2D" uid="uid://dtnbbufthbgms" path="res://arrow.png" id="2_2ndhl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ndhl"]
+radius = 1.0
+
+[node name="Arrow" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 3
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_l5ahi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2ndhl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0.5)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_2ndhl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

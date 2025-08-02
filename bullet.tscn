@@ -23,7 +23,7 @@ z_as_relative = false
 scale = Vector2(8, 8)
 texture = SubResource("PlaceholderTexture2D_rtl8c")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["Bullet"]]
 collision_layer = 8
 collision_mask = 2
 

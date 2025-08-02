@@ -29,6 +29,7 @@ project/assembly_name="gmtk2025"
 [global_group]
 
 Enemy=""
+Bullet=""
 
 [rendering]
 

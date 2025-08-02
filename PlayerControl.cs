@@ -112,7 +112,7 @@ public partial class PlayerControl : CharacterBody2D
 
 	public void OnBodyEntered(Node2D body)
 	{
-		if (body.GetParent().Name == "Bullet" && !((BulletMover)body.GetParent()).CanHitPlayer)
+		if (body.IsInGroup("Bullet") && !((BulletMover)body.GetParent()).CanHitPlayer)
 		{
 			GD.Print("A");
 			return;
