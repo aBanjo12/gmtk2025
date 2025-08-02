@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1e8yna1iwog6"]
+[gd_scene load_steps=7 format=3 uid="uid://d1e8yna1iwog6"]
 
 [ext_resource type="Script" uid="uid://dq4fvvs7qpp00" path="res://PlayerControl.cs" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://6hp1y3lw2e1i" path="res://gun.tscn" id="2_onrkg"]
@@ -10,6 +10,10 @@ size = Vector2(30, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
+custom_solver_bias = 1.0
+radius = 32.0
 
 [node name="Player" type="Node2D"]
 
@@ -41,6 +45,13 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/HurtBox"]
 shape = SubResource("CircleShape2D_onrkg")
+
+[node name="BulletLeave" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/BulletLeave"]
+shape = SubResource("CircleShape2D_i3pqv")
 
 [node name="Timer" type="Timer" parent="CharacterBody2D"]
 one_shot = true

@@ -18,12 +18,6 @@ public partial class BulletMover : Node2D
 	private int yCooldown = 0;
 	private int xCooldown = 0;
 
-	public override void _Ready()
-	{
-		var hurtBox = GetTree().Root.GetNode<Node2D>("GameScene/Player/CharacterBody2D").GetNode<Area2D>("HurtBox");
-		hurtBox.BodyExited += OnBodyExit;
-	}
-
 	public override void _PhysicsProcess(double delta)
 	{
 		Position += Angle * Speed * (float)delta;
@@ -42,10 +36,5 @@ public partial class BulletMover : Node2D
 			yCooldown--;
 		if (xCooldown > 0)
 			xCooldown--;
-	}
-
-	public void OnBodyExit(Node2D body)
-	{
-		CanHitPlayer = true;
 	}
 }
