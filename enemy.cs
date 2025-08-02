@@ -8,8 +8,12 @@ public partial class Enemy : CharacterBody2D
 	public bool dead = false;
 
 	Area2D hurtbox;
+	Area2D	 atkRange;
 	Timer timer;
-
+	Timer atkTimer;
+	AnimatedSprite2D animation;
+	bool attacking = false;
+	bool canAttack = true;
 
 	PlayerControl player;
 
@@ -21,13 +25,31 @@ public partial class Enemy : CharacterBody2D
 		hurtbox = GetNode<Area2D>("HurtBox");
 		hurtbox.BodyEntered += OnBodyEntered;
 
+		atkRange = GetNode<Area2D>("AttackRange");
+		((AttackRange)atkRange).PlayerInRange += OnPlayerInRange;
+
 		timer = GetNode<Timer>("Timer");
 		timer.Timeout += Timout;
+
+        atkTimer = GetNode<Timer>("AttackTimer");
+        atkTimer.Timeout += OnAttackTimerTimout;
+		GD.Print(atkTimer);
+
+		animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		animation.AnimationFinished += OnAnimationFinished;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		EnemyMovement(delta);
+		if (attacking)
+		{
+			Attack();
+		}
+		else if (!dead)
+		{
+			EnemyMovement(delta);
+		}
+
 	}
 
 	public void EnemyMovement(double delta)
@@ -35,7 +57,19 @@ public partial class Enemy : CharacterBody2D
 		Vector2 playerPos = player.Position;
 		Vector2 posDelta = playerPos - GlobalPosition;
 		Velocity = posDelta.Normalized() * Speed;
+		if (Velocity.X > 0)
+		{
+			Scale = new Vector2(1, 1);
+			RotationDegrees = 0;
+		}
+		else if (Velocity.X < 0)
+		{
+			Scale = new Vector2(1, -1);
+			RotationDegrees = 180;
+		}
 		MoveAndSlide();
+
+		animation.Play("Walking");
 	}
 
 	public void OnBodyEntered(Node2D body)
@@ -46,6 +80,21 @@ public partial class Enemy : CharacterBody2D
 			CallDeferred("Die");
 
 		CallDeferred("DisableHurtbox");
+	}
+
+	public void OnPlayerInRange()
+	{
+		if (canAttack)
+		{
+			canAttack = false;
+			atkTimer.Start();
+			attacking = true;
+		}
+	}
+
+	public void OnAnimationFinished()
+	{
+		attacking = false;
 	}
 
 	public void DisableHurtbox()
@@ -59,10 +108,21 @@ public partial class Enemy : CharacterBody2D
 		hurtbox.ProcessMode = ProcessModeEnum.Always;
 	}
 
+	public void OnAttackTimerTimout()
+    {
+		canAttack = true;
+    }
+
 	public void Die()
 	{
-		ProcessMode = ProcessModeEnum.Disabled;
-		Visible = false;
+		// ProcessMode = ProcessModeEnum.Disabled;
+		// Visible = false;
+		animation.Play("Dying");
 		dead = true;
+	}
+
+	public void Attack()
+	{
+		animation.Play("Attacking");
 	}
 }
