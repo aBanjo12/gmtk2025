@@ -12,6 +12,7 @@ public partial class LevelLoader : Node2D
 	Timer timer;
 	Area2D exit;
 	bool canChangeLevel = true;
+	private int currentLevel = 0;
 
 	public override void _Ready()
 	{
@@ -25,7 +26,7 @@ public partial class LevelLoader : Node2D
 				levelArr[i].Visible = false;
 			}
 		}
-		activeLevel = levelArr[0];
+		activeLevel = levelArr[currentLevel];
 		ConnectEnemiesDead(activeLevel);
 		ConnectLevelExit(activeLevel);
 		ShowExitBlock(activeLevel);
@@ -38,11 +39,13 @@ public partial class LevelLoader : Node2D
 	{
 		activeLevel.ProcessMode = ProcessModeEnum.Disabled;
 		activeLevel.Visible = false;
+		activeLevel.GetNode<TileMapLayer>("Walls").SetEnabled(false);
 		exit.BodyEntered -= OnBodyEntered;
 
 		activeLevel = nextLevel;
 		activeLevel.ProcessMode = ProcessModeEnum.Always;
 		activeLevel.Visible = true;
+		activeLevel.GetNode<TileMapLayer>("Walls").SetEnabled(true);
 
 		ConnectEnemiesDead(activeLevel);
 		ConnectLevelExit(activeLevel);
@@ -78,10 +81,13 @@ public partial class LevelLoader : Node2D
 	{
 		if (canChangeLevel)
 		{
+			currentLevel++;
+			if (currentLevel == levelArrayNodePath.Length)
+				currentLevel = 0;
 			GD.Print("Level Change");
 			EmitSignal(SignalName.LevelChange);
 
-			CallDeferred("GoToNextLevel", levelArr[1]);
+			CallDeferred("GoToNextLevel", levelArr[currentLevel]);
 			canChangeLevel = false;
 			timer.Start();
 		}

@@ -1,21 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpxqkhx1da1k"]
+[gd_scene load_steps=6 format=3 uid="uid://bpxqkhx1da1k"]
 
 [ext_resource type="Script" uid="uid://djmqlyk01iqyc" path="res://LevelLoader.cs" id="1_ox13j"]
-[ext_resource type="PackedScene" uid="uid://fbo84spe20k3" path="res://level.tscn" id="2_73jjw"]
-[ext_resource type="PackedScene" uid="uid://bynxylyjwneh0" path="res://level2.tscn" id="3_nfi1l"]
+[ext_resource type="PackedScene" uid="uid://fbo84spe20k3" path="res://level2.tscn" id="2_73jjw"]
+[ext_resource type="PackedScene" uid="uid://dq1fitp4kqyw2" path="res://level.tscn" id="3_73jjw"]
+[ext_resource type="Script" uid="uid://ngn2yu3hgdlm" path="res://Level.cs" id="4_dc8xe"]
+[ext_resource type="PackedScene" uid="uid://baw6ofn4rshl0" path="res://level_1.tscn" id="4_nfi1l"]
 
 [node name="LevelLoader" type="Node2D"]
 script = ExtResource("1_ox13j")
-levelArrayNodePath = Array[NodePath]([NodePath("Level"), NodePath("Level2")])
+levelArrayNodePath = Array[NodePath]([NodePath("Level"), NodePath("Level1"), NodePath("Level2")])
 
-[node name="Level" parent="." instance=ExtResource("2_73jjw")]
+[node name="Level2" parent="." instance=ExtResource("2_73jjw")]
+visible = false
 
-[node name="Level2" parent="." instance=ExtResource("3_nfi1l")]
+[node name="Level1" parent="." instance=ExtResource("4_nfi1l")]
+visible = false
+script = ExtResource("4_dc8xe")
+
+[node name="Level" parent="." instance=ExtResource("3_73jjw")]
+script = ExtResource("4_dc8xe")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
 [connection signal="LevelChange" from="." to="." method="_on_level_change"]
-[connection signal="EnemiesDead" from="Level" to="." method="_on_level_enemies_dead"]
+[connection signal="EnemiesDead" from="Level2" to="." method="_on_level_enemies_dead"]
+[connection signal="EnemiesDead" from="Level1" to="." method="_on_level_1_enemies_dead"]
+[connection signal="EnemiesDead" from="Level" to="Level" method="_on_enemies_dead"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

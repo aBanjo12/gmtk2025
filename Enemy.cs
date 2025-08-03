@@ -108,7 +108,7 @@ public partial class Enemy : CharacterBody2D
 	}
 
 	public virtual void OnAttackTimerTimout()
-    {
+	{
 		canAttack = true;
 	}
 
