@@ -48,24 +48,16 @@ public partial class Enemy : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (dead)
-		{
-
-		}
-		else if (attacking)
-		{
-			// Attack();
-		}
-		else if (!attacking)
-		{
+		Velocity = new Vector2();
+		if (!dead && !attacking) {
 			EnemyMovement(delta);
 		}
-
+		MoveAndSlide();
 	}
 
 	public virtual void EnemyMovement(double delta)
 	{
-		Vector2 playerPos = follow.Position;
+		Vector2 playerPos = player.Position;
 		Vector2 posDelta = playerPos - GlobalPosition;
 		Velocity = posDelta.Normalized() * Speed;
 		if (Velocity.X > 0)
@@ -94,7 +86,7 @@ public partial class Enemy : CharacterBody2D
 
 	public virtual void OnPlayerInRange()
 	{
-		if (canAttack)
+		if (canAttack && !dead)
 		{
 			canAttack = false;
 			atkTimer.Start();
@@ -105,10 +97,13 @@ public partial class Enemy : CharacterBody2D
 
 	public virtual void OnAnimationFinished()
 	{
-		if (attacking) attacking = false;
 		if (dead)
 		{
 			GetParent().RemoveChild(this);
+		}
+		else if (attacking)
+		{
+			attacking = false;
 		}
 	}
 
@@ -132,6 +127,11 @@ public partial class Enemy : CharacterBody2D
 
 	public virtual void Die()
 	{
+		if (attacking)
+		{
+			animation.Stop();
+			attacking = false;
+		}
 		animation.Play("Dying");
 		dead = true;
 	}

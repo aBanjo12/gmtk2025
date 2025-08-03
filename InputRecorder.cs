@@ -14,7 +14,7 @@ public partial class InputRecorder : Node
 
     public override void _Ready()
     {
-        GD.Print("InputRecorder Ready");
+        // GD.Print("InputRecorder Ready");
         (GetTree().Root.GetNode<Node>("GlobalEvents") as GlobalEvents).Connect(GlobalEvents.SignalName.Fire, new Callable(this, nameof(GunShot)));
     }
 
@@ -50,7 +50,7 @@ public partial class InputRecorder : Node
         float currentTime = Time.GetTicksMsec() / 1000f;
         float relativeTime = currentTime - _recordStartTime;
         _recordedEvents.Add(new KeyEvent(KeyEvent.EventType.MouseClick, relativeTime, Key.None, position));
-        GD.Print("gun at " + relativeTime);
+        // GD.Print("gun at " + relativeTime);
     }
 
     public List<KeyEvent> GetRecordedEvents() => _recordedEvents;
@@ -68,7 +68,7 @@ public partial class InputRecorder : Node
             if (TrackedKeys.Contains(keyEvent.Keycode))
             {
                 var eventType = keyEvent.Pressed ? KeyEvent.EventType.KeyDown : KeyEvent.EventType.KeyUp;
-                GD.Print($"keyevent {eventType} at {relativeTime} key {keyEvent.Keycode}");
+                // GD.Print($"keyevent {eventType} at {relativeTime} key {keyEvent.Keycode}");
                 _recordedEvents.Add(new KeyEvent(eventType, relativeTime, keyEvent.Keycode));
             }
         }
