@@ -5,18 +5,20 @@ public partial class Enemy : CharacterBody2D
 {
 	[Export] public float Speed;
 	[Export] public int Health = 10;
+	[Export] public float FlashTimer = 0.1f;
 	public bool dead = false;
 
 	Area2D hurtbox;
-	Area2D	 atkRange;
+	Area2D atkRange;
 	Timer timer;
 	Timer atkTimer;
 	AnimatedSprite2D animation;
 	bool attacking = false;
 	bool canAttack = true;
+	bool canFlash = true;
 
 	public PlayerControl player;
-	
+
 	public override void _Ready()
 	{
 		player = (PlayerControl)GetTree().Root.GetNode("GameScene/Player");
@@ -33,15 +35,26 @@ public partial class Enemy : CharacterBody2D
 		atkTimer = GetNode<Timer>("AttackTimer");
 		atkTimer.Timeout += OnAttackTimerTimout;
 
+
 		animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		animation.AnimationFinished += OnAnimationFinished;
 	}
+
+	public override void _Process(double delta)
+	{
+		if (canFlash && timer.WaitTime - timer.TimeLeft >= FlashTimer)
+		{
+			FlashTimeout();
+			canFlash = false;
+		}
+	}
+
 
 	public override void _PhysicsProcess(double delta)
 	{
 		if (dead)
 		{
-			
+
 		}
 		else if (attacking)
 		{
@@ -109,6 +122,8 @@ public partial class Enemy : CharacterBody2D
 	{
 		hurtbox.ProcessMode = ProcessModeEnum.Disabled;
 		timer.Start();
+		canFlash = true;
+		animation.Modulate = Color.FromHtml("#ff0000");
 	}
 
 	public virtual void Timout()
@@ -123,12 +138,17 @@ public partial class Enemy : CharacterBody2D
 
 	public virtual void Die()
 	{
-		animation.Play("Dying");	
+		animation.Play("Dying");
 		dead = true;
 	}
 
 	public virtual void Attack()
 	{
 		animation.Play("Attacking");
+	}
+	
+	public void FlashTimeout()
+	{
+		animation.Modulate = Color.FromHtml("#ffffff");
 	}
 }

@@ -16,12 +16,15 @@ public partial class PlayerControl : CharacterBody2D
 
 	[Export] public CollisionShape2D MyShape;
 	[Export] public int EnemyLayerMask;
+	[Export] public float flashTimer = 0.1f;
 
 	[Signal]
 	public delegate void HurtPlayerEventHandler();
 
 	Area2D hurtbox;
 	Timer timer;
+	bool canFlash;
+	Sprite2D sprite2D;
 
 	public override void _Ready()
 	{
@@ -34,9 +37,21 @@ public partial class PlayerControl : CharacterBody2D
 		timer = GetNode<Timer>("Timer");
 		timer.Timeout += Timout;
 
+		sprite2D = GetNode<Sprite2D>("Sprite2D");
+
 		HurtPlayer += HandleHurtPlayer;
 
 	}
+
+    public override void _Process(double delta)
+    {
+		if (canFlash && timer.WaitTime - timer.TimeLeft >= flashTimer)
+		{
+			FlashTimeout();
+			canFlash = false;
+		}
+    }
+
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -60,11 +75,6 @@ public partial class PlayerControl : CharacterBody2D
 		Velocity = movement * Speed;
 		MoveAndSlide();
 
-		// if (IsInsideTargetShape())
-		// {
-		// 	EmitSignal(SignalName.HurtPlayer);
-		// }
-
 	}
 
 	public void OnLevelChange()
@@ -80,7 +90,6 @@ public partial class PlayerControl : CharacterBody2D
 	public void HandleHurtPlayer()
 	{
 		PlayerHealth--;
-		//GD.Print("player hurt " + PlayerHealth);
 		if (PlayerHealth <= 0)
 			PlayerDie();
 	}
@@ -114,14 +123,12 @@ public partial class PlayerControl : CharacterBody2D
 	{
 		if (body.IsInGroup("Bullet") && !((BulletMover)body.GetParent()).CanHitPlayer)
 		{
-			GD.Print("A");
 			return;
 		}
 		PlayerHealth--;
-		GD.Print("player hurt " + PlayerHealth);
 		if (PlayerHealth <= 0)
 			PlayerDie();
-		
+
 		CallDeferred("DisableHurtbox");
 	}
 
@@ -129,10 +136,17 @@ public partial class PlayerControl : CharacterBody2D
 	{
 		hurtbox.ProcessMode = ProcessModeEnum.Disabled;
 		timer.Start();
+		canFlash = true;
+		sprite2D.Modulate = Color.FromHtml("#ff0000");
 	}
 
 	public void Timout()
 	{
 		hurtbox.ProcessMode = ProcessModeEnum.Always;
+	}
+
+	public void FlashTimeout()
+	{
+		sprite2D.Modulate = Color.FromHtml("#ffffff");
 	}
 }
