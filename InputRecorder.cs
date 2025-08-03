@@ -23,6 +23,15 @@ public partial class InputRecorder : Node
         _recordedEvents.Clear();
         _recordStartTime = Time.GetTicksMsec() / 1000f;
         _isRecording = true;
+        if (Input.IsKeyPressed(Key.W))
+            _recordedEvents.Add(new KeyEvent(KeyEvent.EventType.KeyDown, 0f, Key.W));
+        if (Input.IsKeyPressed(Key.A))
+            _recordedEvents.Add(new KeyEvent(KeyEvent.EventType.KeyDown, 0f, Key.A));
+        if (Input.IsKeyPressed(Key.S))
+            _recordedEvents.Add(new KeyEvent(KeyEvent.EventType.KeyDown, 0f, Key.S));
+        if (Input.IsKeyPressed(Key.D))
+            _recordedEvents.Add(new KeyEvent(KeyEvent.EventType.KeyDown, 0f, Key.D));
+            
     }
 
     public void StopRecording()

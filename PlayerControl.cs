@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using gmtk2025;
 using Environment = Godot.Environment;
 using Timer = Godot.Timer;
 
@@ -35,7 +36,16 @@ public partial class PlayerControl : CharacterBody2D
 	Sprite2D sprite2D;
 	
 	public bool[] KeyStates = new bool[4];
+	
+	[Export]
+	public float FireRate;
+	//bullets per second
 
+	private float timeSinceLastShot = 0f;
+	
+	private Node root;
+	private PackedScene bulletScene;
+	
 	private readonly Dictionary<Key, int> KeyMap = new Dictionary<Key, int>
 	{
 		{ Key.W, 0 },
@@ -87,13 +97,16 @@ public partial class PlayerControl : CharacterBody2D
 			}
 			else if (current.Type == KeyEvent.EventType.MouseClick)
 			{
-				// Handle mouse click at current.RelativePosition
+				FireBullet(current.RelativePosition);
 			}
 		}
 	}
 
 	public override void _Ready()
 	{
+		root = GetTree().Root.GetChildren()[0];
+		bulletScene = (PackedScene)ResourceLoader.Load("res://bullet.tscn");
+		
 		LevelLoader levelLoader = GetTree().Root.GetNode<LevelLoader>("GameScene/LevelLoader");
 		levelLoader.LevelChange += OnLevelChange;
 
@@ -109,11 +122,16 @@ public partial class PlayerControl : CharacterBody2D
 
 		if (isSimulated)
 		{
+			
 			var list = (GetTree().Root.GetNode("GameScene/LevelLoader") as LevelLoader).getIndividualEvents()[simIndex];
 			bool isMainThread = Thread.CurrentThread.ManagedThreadId == 1;
 			GD.Print("runing " + isMainThread);
 			_ = ReplayKeyEventsAsync(list);
 
+		}
+		else
+		{
+			CollisionMask += 128;
 		}
 
 	}
@@ -132,6 +150,7 @@ public partial class PlayerControl : CharacterBody2D
 	{
 		if (!isSimulated)
 		{
+			GunPhysicsProcess(delta);
 			PlayerMovement();
 		}
 		else
@@ -249,5 +268,32 @@ public partial class PlayerControl : CharacterBody2D
 	public void FlashTimeout()
 	{
 		sprite2D.Modulate = Color.FromHtml("#ffffff");
+	}
+	
+	public void GunPhysicsProcess(double delta)
+	{
+		Vector2 mousePosition = GetGlobalMousePosition();
+		Vector2 direction = mousePosition - GlobalPosition;
+
+		if (Input.IsMouseButtonPressed(MouseButton.Left))
+		{
+			float fireInterval = 1.0f / FireRate;
+			if (timeSinceLastShot >= fireInterval)
+			{
+				FireBullet(direction);
+				timeSinceLastShot = 0f;
+			}
+		}
+		timeSinceLastShot += (float)delta;
+	}
+	
+	public void FireBullet(Vector2 direction)
+	{
+		Node bullet = bulletScene.Instantiate();
+		BulletMover mover = bullet as BulletMover;
+		mover.Position = GlobalPosition;
+		mover.Angle = direction.Normalized();
+		GetTree().Root.GetNode("GameScene").AddChild(bullet);
+		(GetTree().Root.GetNode<Node>("GlobalEvents") as GlobalEvents).EmitFireEvent(direction.Normalized());
 	}
 }

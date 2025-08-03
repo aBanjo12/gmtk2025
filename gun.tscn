@@ -9,6 +9,7 @@ script = ExtResource("1_vk1bi")
 FireRate = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(16, 24)
 texture = SubResource("PlaceholderTexture2D_r8ywq")
 offset = Vector2(0, -1)

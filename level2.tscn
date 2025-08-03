@@ -76,7 +76,7 @@ sources/0 = SubResource("TileSetAtlasSource_3opl0")
 script = ExtResource("1_r6vdu")
 
 [node name="OuterWalls" type="StaticBody2D" parent="."]
-collision_layer = 2
+collision_layer = 128
 
 [node name="ExitBlock" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(0, -144)

@@ -11,7 +11,6 @@ size = Vector2(1, 1)
 z_index = -1
 script = ExtResource("1_v7oki")
 Speed = 100.0
-WallLayerMask = 2
 North = NodePath("North")
 South = NodePath("South")
 East = NodePath("East")
@@ -25,7 +24,7 @@ texture = SubResource("PlaceholderTexture2D_rtl8c")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["Bullet"]]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 130
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 scale = Vector2(7.98737, 8)
@@ -33,16 +32,16 @@ shape = SubResource("RectangleShape2D_v7oki")
 
 [node name="South" type="RayCast2D" parent="."]
 target_position = Vector2(0, 5)
-collision_mask = 2
+collision_mask = 130
 
 [node name="North" type="RayCast2D" parent="."]
 target_position = Vector2(0, -5)
-collision_mask = 2
+collision_mask = 130
 
 [node name="West" type="RayCast2D" parent="."]
 target_position = Vector2(-5, 0)
-collision_mask = 2
+collision_mask = 130
 
 [node name="East" type="RayCast2D" parent="."]
 target_position = Vector2(5, 0)
-collision_mask = 2
+collision_mask = 130

@@ -5,9 +5,7 @@ public partial class BulletMover : Node2D
 {
 	[Export] public Vector2 Angle;
 	[Export] public float Speed;
-
-	[Export] public int WallLayerMask;
-
+	
 	[Export] public RayCast2D North;
 	[Export] public RayCast2D South;
 	[Export] public RayCast2D East;

@@ -129,6 +129,14 @@ public partial class LevelLoader : Node2D
 	{
 		if (canChangeLevel)
 		{
+			if (body is PlayerControl _player)
+			{
+				if (_player.isSimulated)
+				{
+					_player.GetParent().RemoveChild(_player);
+					return;
+				}
+			}
 			GD.Print("Level Change");
 			EmitSignal(SignalName.LevelChange);
 

@@ -45,7 +45,9 @@ texture_region_size = Vector2i(32, 32)
 4:5/0 = 0
 0:0/0 = 0
 0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSet" id="TileSet_km5ld"]
 tile_size = Vector2i(32, 32)
@@ -72,7 +74,7 @@ sources/0 = SubResource("TileSetAtlasSource_f2txt")
 [node name="Level" type="Node2D"]
 
 [node name="OuterWalls" type="StaticBody2D" parent="."]
-collision_layer = 2
+collision_layer = 128
 
 [node name="ExitBlock" type="CollisionShape2D" parent="OuterWalls"]
 position = Vector2(0, -208)

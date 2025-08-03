@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1e8yna1iwog6"]
+[gd_scene load_steps=5 format=3 uid="uid://d1e8yna1iwog6"]
 
 [ext_resource type="Script" uid="uid://dq4fvvs7qpp00" path="res://PlayerControl.cs" id="1_4flbx"]
-[ext_resource type="PackedScene" uid="uid://6hp1y3lw2e1i" path="res://gun.tscn" id="2_onrkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(30, 32)
@@ -22,6 +21,7 @@ RightKey = 68
 PlayerHealth = 3
 MyShape = NodePath("CollisionShape2D")
 EnemyLayerMask = 2
+FireRate = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_onrkg")
@@ -39,5 +39,3 @@ shape = SubResource("CircleShape2D_hqtel")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
-
-[node name="Gun" parent="." instance=ExtResource("2_onrkg")]
