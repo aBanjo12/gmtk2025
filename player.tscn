@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1e8yna1iwog6"]
+[gd_scene load_steps=6 format=3 uid="uid://d1e8yna1iwog6"]
 
 [ext_resource type="Script" uid="uid://dq4fvvs7qpp00" path="res://PlayerControl.cs" id="1_4flbx"]
 
@@ -9,6 +9,9 @@ size = Vector2(30, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
 radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
+radius = 32.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("MyShape")]
 collision_mask = 2
@@ -36,6 +39,13 @@ collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_hqtel")
+
+[node name="BulletLeave" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletLeave"]
+shape = SubResource("CircleShape2D_4flbx")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

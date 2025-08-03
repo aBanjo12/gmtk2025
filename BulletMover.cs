@@ -20,8 +20,8 @@ public partial class BulletMover : Node2D
 
 	public override void _Ready()
 	{
-		var hurtBox = GetTree().Root.GetNode<Node2D>("GameScene/Player").GetNode<Area2D>("HurtBox");
-		hurtBox.BodyExited += OnBodyExit;
+		var bulletLeave = GetTree().Root.GetNode<Node2D>("GameScene/Player").GetNode<Area2D>("BulletLeave");
+		bulletLeave.BodyExited += OnBodyExit;
 	}
 
 	public override void _PhysicsProcess(double delta)
