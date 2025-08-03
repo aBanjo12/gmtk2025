@@ -57,7 +57,7 @@ public partial class Enemy : CharacterBody2D
 
 	public virtual void EnemyMovement(double delta)
 	{
-		Vector2 playerPos = player.Position;
+		Vector2 playerPos = follow.Position;
 		Vector2 posDelta = playerPos - GlobalPosition;
 		Velocity = posDelta.Normalized() * Speed;
 		if (Velocity.X > 0)
