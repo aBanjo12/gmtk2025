@@ -20,8 +20,8 @@ public partial class BulletMover : Node2D
 
 	public override void _Ready()
 	{
-		var bulletLeave = GetTree().Root.GetNode<Node2D>("GameScene/Player").GetNode<Area2D>("BulletLeave");
-		bulletLeave.BodyExited += OnBodyExit;
+		Timer timer = GetNode<Timer>("Timer");
+		timer.Timeout += Timeout;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -60,7 +60,7 @@ public partial class BulletMover : Node2D
 		}
 	}
 
-	public void OnBodyExit(Node2D body)
+	public void Timeout()
 	{
 		CanHitPlayer = true;
 	}
