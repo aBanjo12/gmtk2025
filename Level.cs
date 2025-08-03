@@ -8,7 +8,9 @@ public partial class Level : Node2D
 	[Signal] public delegate void EnemiesDeadEventHandler();
 	List<Enemy> enemies;
 	bool sendSignal = true;
-	public override void _Ready()
+	public List<List<KeyEvent>> RecordedEvents = new List<List<KeyEvent>>();
+	
+	public void LevelReady()
 	{
 		enemies = new List<Enemy>();
 		Godot.Collections.Array<Node> arr = GetChildren();
@@ -19,6 +21,9 @@ public partial class Level : Node2D
 				enemies.Add((Enemy)i);
 			}
 		}
+		
+		GD.Print("level init");
+		
 	}
 
 	public override void _Process(double delta)

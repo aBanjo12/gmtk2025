@@ -13,7 +13,12 @@ config_version=5
 config/name="gmtk2025"
 run/main_scene="uid://chw5gs6st4uox"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+run/max_fps=60
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalEvents="*res://GlobalEvents.cs"
 
 [display]
 

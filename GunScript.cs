@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using gmtk2025;
 
 public partial class GunScript : Node2D
 {
@@ -46,5 +47,6 @@ public partial class GunScript : Node2D
 		mover.Position = GlobalPosition;
 		mover.Angle = direction.Normalized();
 		GetTree().Root.GetNode("GameScene").AddChild(bullet);
+		(GetTree().Root.GetNode<Node>("GlobalEvents") as GlobalEvents).EmitFireEvent(direction.Normalized());
 	}
 }

@@ -89,7 +89,6 @@ public partial class Enemy : CharacterBody2D
 
 	public virtual void OnBodyEntered(Node2D body)
 	{
-		GD.Print("A");
 		Health--;
 		if (Health <= 0)
 			CallDeferred("Die");
