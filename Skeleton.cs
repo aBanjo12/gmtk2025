@@ -19,7 +19,7 @@ public partial class Skeleton : Enemy
         base.Attack();
         var arrowInstance = arrow.Instantiate() as RigidBody2D;
         arrowInstance.Position = GlobalPosition;
-        float rotation = (float)Math.Atan2(player.GlobalPosition.Y - GlobalPosition.Y, player.GlobalPosition.X - GlobalPosition.X);
+        float rotation = (float)Math.Atan2(follow.GlobalPosition.Y - GlobalPosition.Y, follow.GlobalPosition.X - GlobalPosition.X);
         arrowInstance.Rotation = rotation;
         arrowInstance.ApplyImpulse(new Vector2(Speed, 0).Rotated(rotation));
         GetTree().Root.AddChild(arrowInstance);
