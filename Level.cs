@@ -13,7 +13,8 @@ public partial class Level : Node2D
 	public void LevelReady()
 	{
 		enemies = new List<Enemy>();
-		Godot.Collections.Array<Node> arr = GetChildren();
+		Godot.Collections.Array<Node> arr = GetTree().GetNodesInGroup("Enemy");
+		
 		foreach (Node i in arr)
 		{
 			if (i.IsInGroup("Enemy"))
@@ -22,7 +23,9 @@ public partial class Level : Node2D
 			}
 		}
 		
-		GD.Print("level init");
+		sendSignal = true;
+		
+		GD.Print("level init " + arr.Count + " enemies");
 		
 	}
 
@@ -37,6 +40,11 @@ public partial class Level : Node2D
 
 	public bool AllEnemiesDead()
 	{
+		if (enemies == null)
+		{
+			GD.Print("AllEnemiesDead NULL");
+			return false;
+		}
 		foreach (Enemy i in enemies)
 		{
 			if (!i.dead) return false;

@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7oki"]
 size = Vector2(1, 1)
 
-[node name="Bullet" type="Node2D" node_paths=PackedStringArray("North", "South", "East", "West")]
+[node name="Bullet" type="Node2D" node_paths=PackedStringArray("North", "South", "East", "West") groups=["Bullet"]]
 z_index = -1
 script = ExtResource("1_v7oki")
 Speed = 100.0

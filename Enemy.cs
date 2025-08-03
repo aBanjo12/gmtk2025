@@ -7,6 +7,7 @@ public partial class Enemy : CharacterBody2D
 	[Export] public int Health = 10;
 	[Export] public float FlashTimer = 0.1f;
 	public bool dead = false;
+	public Node2D follow;
 
 	Area2D hurtbox;
 	Area2D atkRange;
@@ -16,13 +17,8 @@ public partial class Enemy : CharacterBody2D
 	bool attacking = false;
 	bool canAttack = true;
 	bool canFlash = true;
-
-	public PlayerControl player;
-
 	public override void _Ready()
 	{
-		player = (PlayerControl)GetTree().Root.GetNode("GameScene/Player");
-
 		hurtbox = GetNode<Area2D>("HurtBox");
 		hurtbox.BodyEntered += OnBodyEntered;
 
@@ -69,7 +65,7 @@ public partial class Enemy : CharacterBody2D
 
 	public virtual void EnemyMovement(double delta)
 	{
-		Vector2 playerPos = player.Position;
+		Vector2 playerPos = follow.Position;
 		Vector2 posDelta = playerPos - GlobalPosition;
 		Velocity = posDelta.Normalized() * Speed;
 		if (Velocity.X > 0)
@@ -110,10 +106,9 @@ public partial class Enemy : CharacterBody2D
 	public virtual void OnAnimationFinished()
 	{
 		if (attacking) attacking = false;
-		else if (dead)
+		if (dead)
 		{
-			ProcessMode = ProcessModeEnum.Disabled;
-			Visible = false;
+			GetParent().RemoveChild(this);
 		}
 	}
 

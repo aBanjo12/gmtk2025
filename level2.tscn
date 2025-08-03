@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://fbo84spe20k3"]
+[gd_scene load_steps=12 format=4 uid="uid://fbo84spe20k3"]
 
 [ext_resource type="Script" uid="uid://ngn2yu3hgdlm" path="res://Level.cs" id="1_r6vdu"]
 [ext_resource type="Texture2D" uid="uid://dsaeg6eo3evrr" path="res://exitSprite.png" id="2_21xmu"]
 [ext_resource type="Texture2D" uid="uid://clgwrtpdwjvt0" path="res://levelTiles.png" id="3_8i3m3"]
 [ext_resource type="Texture2D" uid="uid://cblsn0qixn80q" path="res://tiles.png" id="4_rmy57"]
-[ext_resource type="PackedScene" uid="uid://dk3m1rwvmxvth" path="res://enemy.tscn" id="5_qulpo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_km5ld"]
 size = Vector2(66, 32)
@@ -108,9 +107,3 @@ use_parent_material = true
 tile_map_data = PackedByteArray("AAD8//z/AAABAAAAAAD8//3/AAACAAIAAAD8//7/AAAAAAEAAAD8////AAACAAIAAAD8/wAAAAAAAAIAAAD8/wEAAAABAAAAAAD8/wIAAAABAAEAAAD8/wMAAAACAAIAAAD9//z/AAACAAIAAAD9//3/AAAAAAIAAAD9//7/AAABAAIAAAD9////AAACAAEAAAD9/wAAAAAAAAIAAAD9/wEAAAAAAAEAAAD9/wIAAAACAAIAAAD9/wMAAAAAAAIAAAD+//z/AAABAAIAAAD+//3/AAACAAEAAAD+//7/AAACAAEAAAD+////AAABAAAAAAD+/wAAAAACAAIAAAD+/wEAAAAAAAAAAAD+/wIAAAAAAAEAAAD+/wMAAAACAAEAAAD///z/AAAAAAEAAAD///3/AAABAAAAAAD///7/AAAAAAAAAAD/////AAACAAEAAAD//wAAAAACAAEAAAD//wEAAAABAAIAAAD//wIAAAACAAIAAAD//wMAAAABAAAAAAAAAPz/AAACAAIAAAAAAP3/AAAAAAAAAAAAAP7/AAACAAIAAAAAAP//AAACAAEAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAABAAAAAAAAAAMAAAACAAEAAAABAPz/AAABAAEAAAABAP3/AAACAAIAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAACAAIAAAABAAEAAAACAAEAAAABAAIAAAAAAAEAAAABAAMAAAABAAIAAAACAPz/AAACAAEAAAACAP3/AAAAAAAAAAACAP7/AAABAAIAAAACAP//AAABAAIAAAACAAAAAAAAAAIAAAACAAEAAAACAAEAAAACAAIAAAAAAAIAAAACAAMAAAAAAAEAAAADAPz/AAACAAIAAAADAP3/AAABAAIAAAADAP7/AAAAAAIAAAADAP//AAAAAAAAAAADAAAAAAABAAIAAAADAAEAAAACAAAAAAADAAIAAAACAAIAAAADAAMAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_f2txt")
 collision_enabled = false
-
-[node name="enemy" parent="." groups=["Enemy"] instance=ExtResource("5_qulpo")]
-position = Vector2(-22, -63)
-
-[node name="enemy2" parent="." groups=["Enemy"] instance=ExtResource("5_qulpo")]
-position = Vector2(46, -57)
