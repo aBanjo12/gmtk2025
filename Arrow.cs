@@ -11,6 +11,5 @@ public partial class Arrow : RigidBody2D
     public void OnBodyEntered(Node body)
     {
         QueueFree();
-        GD.Print("A");
     }
 }

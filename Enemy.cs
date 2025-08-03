@@ -39,11 +39,15 @@ public partial class Enemy : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (attacking)
+		if (dead)
+		{
+			
+		}
+		else if (attacking)
 		{
 			// Attack();
 		}
-		else if (!dead)
+		else if (!attacking)
 		{
 			EnemyMovement(delta);
 		}
@@ -93,7 +97,12 @@ public partial class Enemy : CharacterBody2D
 
 	public virtual void OnAnimationFinished()
 	{
-		attacking = false;
+		if (attacking) attacking = false;
+		else if (dead)
+		{
+			ProcessMode = ProcessModeEnum.Disabled;
+			Visible = false;
+		}
 	}
 
 	public virtual void DisableHurtbox()
@@ -114,9 +123,7 @@ public partial class Enemy : CharacterBody2D
 
 	public virtual void Die()
 	{
-		// ProcessMode = ProcessModeEnum.Disabled;
-		// Visible = false;
-		animation.Play("Dying");
+		animation.Play("Dying");	
 		dead = true;
 	}
 
