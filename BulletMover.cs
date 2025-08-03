@@ -29,27 +29,37 @@ public partial class BulletMover : Node2D
 	public override void _PhysicsProcess(double delta)
 	{
 		Position += Angle * Speed * (float)delta;
-		if ((North.IsColliding() || South.IsColliding()) && yCooldown == 0)
+		if (North.IsColliding() && Angle.Y < 0)
 		{
-			yCooldown = 3;
 			Angle.Y = -Angle.Y;
 			BounceLimit--;
 			if (BounceLimit == 0)
-				GetParent().RemoveChild(this);
+				QueueFree();
 		}
-		if ((East.IsColliding() || West.IsColliding()) && xCooldown == 0)
+
+		if ((South.IsColliding()) && Angle.Y > 0)
 		{
-			xCooldown = 3;
+			Angle.Y = -Angle.Y;
+			BounceLimit--;
+			if (BounceLimit == 0)
+				QueueFree();
+		}
+
+		if (East.IsColliding() && Angle.X > 0)
+		{
 			Angle.X = -Angle.X;
 			BounceLimit--;
 			if (BounceLimit == 0)
-				GetParent().RemoveChild(this);
+				QueueFree();
 		}
 
-		if (yCooldown > 0)
-			yCooldown--;
-		if (xCooldown > 0)
-			xCooldown--;
+		if (West.IsColliding() && Angle.X < 0)
+		{
+			Angle.X = -Angle.X;
+			BounceLimit--;
+			if (BounceLimit == 0)
+				QueueFree();
+		}
 	}
 
 	public void OnBodyExit(Node2D body)
