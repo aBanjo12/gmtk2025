@@ -33,7 +33,7 @@ public partial class InputRecorder : Node
     public List<KeyEvent> StopRecordingGetEvents()
     {
         _isRecording = false;
-        return _recordedEvents;
+        return _recordedEvents.ToList();
     }
 
     public void GunShot(Vector2 position)

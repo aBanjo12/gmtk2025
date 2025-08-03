@@ -23,7 +23,6 @@ public partial class PlayerControl : CharacterBody2D
 	[Export] public int EnemyLayerMask;
 	[Export] public float flashTimer = 0.1f;
 	
-	public List<KeyEvent> KeyEvents;
 	public bool isSimulated = false;
 	public int simIndex = -1;
 	
@@ -82,7 +81,7 @@ public partial class PlayerControl : CharacterBody2D
 			// Apply the key state or mouse click here
 			// Example (you can adjust as needed):
 			if ((current.Type == KeyEvent.EventType.KeyDown || current.Type == KeyEvent.EventType.KeyUp) && 
-			    KeyMap.TryGetValue(current.KeyCode, out int index))
+				KeyMap.TryGetValue(current.KeyCode, out int index))
 			{
 				KeyStates[index] = current.Type == KeyEvent.EventType.KeyDown;
 			}

@@ -64,7 +64,7 @@ public partial class LevelLoader : Node2D
 
 	public void GoToNextLevel(Node2D nextLevel)
 	{
-		(levelArr[currentLevel] as Level).RecordedEvents.Add(inputRecorder.StopRecordingGetEvents());
+		levelKeyEvents[currentLevel].Add(inputRecorder.StopRecordingGetEvents());
 		levelArr[currentLevel].ProcessMode = ProcessModeEnum.Disabled;
 		levelArr[currentLevel].Visible = false;
 		levelArr[currentLevel].GetNode<TileMapLayer>("Walls").SetEnabled(false);
@@ -83,13 +83,12 @@ public partial class LevelLoader : Node2D
 		(levelArr[currentLevel] as Level).LevelReady();
 		levelArr[currentLevel].GetNode<TileMapLayer>("Walls").SetEnabled(true);
 		int i = 0;
-		(levelArr[currentLevel] as Level).RecordedEvents.ForEach(x =>
+		levelKeyEvents[currentLevel].ForEach(x =>
 		{
 			Node playerNode = player.Instantiate();
 			(playerNode as PlayerControl).isSimulated = true;
 			GD.Print("sim i " + i);
 			(playerNode as PlayerControl).simIndex = i;
-			levelKeyEvents[currentLevel].Add(x.ToList());
 			levelArr[currentLevel].AddChild(playerNode);
 			i++;
 		});
